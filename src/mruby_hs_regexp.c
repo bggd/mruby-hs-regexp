@@ -55,8 +55,8 @@ hs_regexp_init(mrb_state *mrb, mrb_value self, mrb_value str, unsigned char flag
 
     reg->reg = regcomp(&ri, RSTRING_PTR(str));
     if (!reg->reg){
-        mrb_raisef(mrb, E_ARGUMENT_ERROR, "'%s' is an invalid regular expression because %s.",
-                   RSTRING_PTR(str), ri.error_msg);
+        mrb_raisef(mrb, E_ARGUMENT_ERROR, "'%S' is an invalid regular expression because %S.",
+                   str, mrb_str_new_cstr(mrb, ri.error_msg));
     }
     reg->flag = flag;
     mrb_iv_set(mrb, self, INTERN("@source"), str);
